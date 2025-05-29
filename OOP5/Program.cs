@@ -82,3 +82,124 @@ Console.WriteLine("---------------------------------------------------");
 // Câu 5: Tính tổng tiền lương phải trả cho nhân viên partime
 double totalParttimeSalary = employees.OfType<ParttimeEmployee>().Sum(emp => emp.calSalary());
 Console.WriteLine($"\nTổng tiền lương phải trả cho nhân viên partime: {totalParttimeSalary}");
+
+Console.WriteLine("---------------------------------------------------");
+
+// Câu 6: Cập nhật (Edit) thông tin nhân viên
+Console.WriteLine("\n== Cập nhật thông tin nhân viên ==");
+bool EditEmployee(int employeeId)
+{
+    Employee? employeeToEdit = employees.FirstOrDefault(e => e.Id == employeeId);
+
+    if (employeeToEdit == null)
+    {
+        Console.WriteLine($"Không tìm thấy nhân viên có ID: {employeeId}");
+        return false;
+    }
+
+    Console.WriteLine($"Đang chỉnh sửa nhân viên: {employeeToEdit}");
+
+    Console.Write("Nhập tên mới (để trống nếu không thay đổi): ");
+    string? newName = Console.ReadLine();
+    if (!string.IsNullOrWhiteSpace(newName))
+    {
+        employeeToEdit.Name = newName;
+    }
+
+    Console.Write("Nhập ID Card mới (để trống nếu không thay đổi): ");
+    string? newIdCard = Console.ReadLine();
+    if (!string.IsNullOrWhiteSpace(newIdCard))
+    {
+        employeeToEdit.IdCart = newIdCard;
+    }
+
+    Console.Write("Nhập ngày sinh mới (định dạng dd/MM/yyyy, để trống nếu không thay đổi): ");
+    string? newBirthdayStr = Console.ReadLine();
+    if (!string.IsNullOrWhiteSpace(newBirthdayStr))
+    {
+        if (DateTime.TryParseExact(newBirthdayStr, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime newBirthday))
+        {
+            employeeToEdit.Birthday = newBirthday;
+        }
+        else
+        {
+            Console.WriteLine("Định dạng ngày không hợp lệ, giữ nguyên ngày sinh cũ.");
+        }
+    }
+
+    // Nếu là nhân viên partime, cập nhật số giờ làm việc
+    if (employeeToEdit is ParttimeEmployee parttime)
+    {
+        Console.Write("Nhập số giờ làm việc mới (để trống nếu không thay đổi): ");
+        string? newHoursStr = Console.ReadLine();
+        if (!string.IsNullOrWhiteSpace(newHoursStr) && int.TryParse(newHoursStr, out int newHours))
+        {
+            parttime.workingHours = newHours;
+        }
+    }
+
+    Console.WriteLine("Thông tin sau khi cập nhật:");
+    Console.WriteLine(employeeToEdit);
+    return true;
+}
+
+// Câu 7: Xóa nhân viên
+Console.WriteLine("\n== Xóa nhân viên ==");
+bool DeleteEmployee(int employeeId)
+{
+    Employee? employeeToDelete = employees.FirstOrDefault(e => e.Id == employeeId);
+
+    if (employeeToDelete == null)
+    {
+        Console.WriteLine($"Không tìm thấy nhân viên có ID: {employeeId}");
+        return false;
+    }
+
+    Console.WriteLine($"Bạn có chắc chắn muốn xóa nhân viên sau? (y/n)");
+    Console.WriteLine(employeeToDelete);
+
+    string? confirmation = Console.ReadLine()?.ToLower();
+
+    if (confirmation == "y")
+    {
+        employees.Remove(employeeToDelete);
+        Console.WriteLine("Đã xóa nhân viên thành công.");
+        return true;
+    }
+    else
+    {
+        Console.WriteLine("Hủy xóa nhân viên.");
+        return false;
+    }
+}
+
+// Thử nghiệm chức năng Edit
+Console.WriteLine("\nThử nghiệm chức năng Edit:");
+Console.Write("Nhập ID nhân viên cần chỉnh sửa: ");
+if (int.TryParse(Console.ReadLine(), out int editId))
+{
+    EditEmployee(editId);
+}
+else
+{
+    Console.WriteLine("ID không hợp lệ!");
+}
+
+// Thử nghiệm chức năng Delete
+Console.WriteLine("\nThử nghiệm chức năng Delete:");
+Console.Write("Nhập ID nhân viên cần xóa: ");
+if (int.TryParse(Console.ReadLine(), out int deleteId))
+{
+    DeleteEmployee(deleteId);
+}
+else
+{
+    Console.WriteLine("ID không hợp lệ!");
+}
+
+// Hiển thị danh sách nhân viên sau khi thực hiện các thao tác
+Console.WriteLine("\nDanh sách nhân viên sau khi cập nhật:");
+foreach (Employee emp in employees)
+{
+    Console.WriteLine(emp);
+}
