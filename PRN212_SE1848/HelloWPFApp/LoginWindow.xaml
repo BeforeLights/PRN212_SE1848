@@ -1,0 +1,30 @@
+﻿<Window x:Class="HelloWPFApp.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HelloWPFApp"
+        mc:Ignorable="d"
+        Title="Đăng nhập hệ thống" Height="450" Width="800">
+    <Grid>
+        <Label Content="Đăng nhập hệ thống quản trị" Margin="133,36,133,0" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Bahnschrift SemiBold" FontSize="40">
+            <Label.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="Red" Offset="1"/>
+                </LinearGradientBrush>
+            </Label.Foreground>
+        </Label>
+        <Label x:Name="Username" Content="_Username"
+               Target ="{Binding ElementName=txtUsername}"
+               HorizontalAlignment="Left" Margin="199,129,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.006,0.435" FontSize="20" FontFamily="Segoe UI Emoji"/>
+        <Label x:Name="Password" Content="_Password"
+               Target ="{Binding ElementName=txtPassword}"
+               HorizontalAlignment="Left" Margin="199,213,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.006,0.435" FontSize="20" FontFamily="Segoe UI Emoji"/>
+        <Button x:Name="btnDangNhap" Content="Đăng nhập" HorizontalAlignment="Center" Margin="0,329,0,0" VerticalAlignment="Top" FontSize="30" RenderTransformOrigin="1.526,0.701" Click="Button_Click_1" Width="160"/>
+        <TextBox x:Name="txtUsername" HorizontalAlignment="Center" Margin="0,166,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="390" Height="30" TextChanged="TextBox_TextChanged" FontSize="20"/>
+        <Button x:Name="btnThoat" Content="X" HorizontalAlignment="Left" Margin="746,10,0,0" VerticalAlignment="Top" FontSize="30" RenderTransformOrigin="1.526,0.701" Click="Button_Click" Width="44" BorderBrush="White" Background="White"/>
+        <PasswordBox x:Name="txtPassword" HorizontalAlignment="Center" Margin="0,250,0,0" VerticalAlignment="Top" Width="390" Height="30"/>
+
+    </Grid>
+</Window>
