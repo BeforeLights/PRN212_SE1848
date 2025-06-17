@@ -21,7 +21,7 @@ This repository contains a collection of my work and learning materials from the
 
 I've structured the repository to organize the learning materials as follows:
 
-*   **`/PRN212_SE1848/`**: This folder contains my primary learning materials, code examples, exercises, and smaller projects from the PRN212 course. Within this, you'll find solutions demonstrating various concepts.
+*   **`/PRN212_SE1848/`**: This folder contains my primary learning materials, code examples, exercises, and smaller projects from the PRN212 course. Within this, you'll find solutions demonstrating various concepts and their respective labs.
 *   **`/ProductManagementDemo/`**: This folder is dedicated to Lab 1, which focuses on applying LINQ for product management tasks.
 
 ## 🛠️ Primary Technologies & Tools Encountered
