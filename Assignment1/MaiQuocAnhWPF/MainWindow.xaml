@@ -1,12 +1,63 @@
 ﻿<Window x:Class="MaiQuocAnhWPF.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MaiQuocAnhWPF"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Sales Management System" Height="600" Width="1000" WindowStartupLocation="CenterScreen">
     <Grid>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Menu Bar -->
+        <Menu Grid.Row="0" Background="LightGray">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Exit" Click="Exit_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Management" x:Name="ManagementMenu">
+                <MenuItem Header="_Customers" Click="OpenCustomers_Click"/>
+                <MenuItem Header="_Products" Click="OpenProducts_Click"/>
+                <MenuItem Header="_Orders" Click="OpenOrders_Click"/>
+                <MenuItem Header="_Categories" Click="OpenCategories_Click"/>
+                <MenuItem Header="_Employees" Click="OpenEmployees_Click" x:Name="EmployeesMenuItem"/>
+            </MenuItem>
+            <MenuItem Header="_Reports" x:Name="ReportsMenu">
+                <MenuItem Header="_Sales Report" Click="OpenSalesReport_Click"/>
+                <MenuItem Header="_Customer Report" Click="OpenCustomerReport_Click"/>
+            </MenuItem>
+        </Menu>
+        
+        <!-- Main Content Area -->
+        <TabControl Grid.Row="1" x:Name="MainTabControl" Margin="10">
+            <TabItem Header="Dashboard">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    
+                    <!-- Welcome Section -->
+                    <StackPanel Grid.Row="0" Margin="20">
+                        <TextBlock x:Name="WelcomeText" FontSize="24" FontWeight="Bold" Margin="0,0,0,10"/>
+                        <TextBlock x:Name="RoleText" FontSize="16" Foreground="Gray"/>
+                    </StackPanel>
+                    
+                    <!-- Quick Actions -->
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Button Content="Manage Customers" Width="150" Height="50" Margin="10" Click="OpenCustomers_Click"/>
+                        <Button Content="Manage Products" Width="150" Height="50" Margin="10" Click="OpenProducts_Click"/>
+                        <Button Content="Manage Orders" Width="150" Height="50" Margin="10" Click="OpenOrders_Click"/>
+                        <Button Content="View Reports" Width="150" Height="50" Margin="10" Click="OpenSalesReport_Click" x:Name="ReportsButton"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        
+        <!-- Status Bar -->
+        <StatusBar Grid.Row="2">
+            <StatusBarItem>
+                <TextBlock x:Name="StatusText" Text="Ready"/>
+            </StatusBarItem>
+        </StatusBar>
     </Grid>
 </Window>

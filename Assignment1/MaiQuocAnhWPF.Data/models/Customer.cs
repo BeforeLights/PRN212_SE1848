@@ -14,6 +14,5 @@ namespace MaiQuocAnhWPF.Data.models
         public string ContactTitle { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
-
     }
 }

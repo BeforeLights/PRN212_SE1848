@@ -9,12 +9,12 @@ namespace MaiQuocAnhWPF.Data.models
     public class Employee
     {
         public int EmployeeID { get; set; }
-        public string Name { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public string JobTitle { get; set; }
-        public string BirthDate { get; set; }
-        public string HireDate { get; set; }
-        public string Address { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string UserName { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
+        public string JobTitle { get; set; } = string.Empty;
+        public DateTime? BirthDate { get; set; }
+        public DateTime? HireDate { get; set; }
+        public string Address { get; set; } = string.Empty;
     }
 }
