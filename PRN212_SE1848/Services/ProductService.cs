@@ -15,9 +15,25 @@ namespace Services
         {
             iRepository = new ProductRepository();
         }
+
+        public bool DeleteProduct(int id)
+        {
+            return iRepository.DeleteProduct(id);
+        }
+
+        public bool DeleteProduct(Product product)
+        {
+            return iRepository.DeleteProduct(product);
+        }
+
         public void GenerateSampleDataset()
         {
             iRepository.GenerateSampleDataset();
+        }
+
+        public Product GetProduct(int id)
+        {
+            return iRepository.GetProduct(id);
         }
 
         public List<Product> GetProducts()
@@ -28,6 +44,11 @@ namespace Services
         public bool SaveProduct(Product product)
         {
             return iRepository.SaveProduct(product);
+        }
+
+        public bool UpdateProduct(Product product)
+        {
+            return iRepository.UpdateProduct(product);
         }
     }
 }

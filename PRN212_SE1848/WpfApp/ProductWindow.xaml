@@ -11,7 +11,7 @@
             <ColumnDefinition Width="63*"/>
             <ColumnDefinition Width="97*"/>
         </Grid.ColumnDefinitions>
-        <ListView x:Name="lvProduct" d:ItemsSource="{d:SampleData ItemCount=5}" FontSize="22" Margin="0,0,0,295" Grid.ColumnSpan="2">
+        <ListView x:Name="lvProduct" d:ItemsSource="{d:SampleData ItemCount=5}" FontSize="22" Margin="0,0,0,295" Grid.ColumnSpan="2" SelectionChanged="lvProduct_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Mã sản phẩm" DisplayMemberBinding="{Binding Id}"/>
@@ -30,6 +30,8 @@
         <Label Content="Đơn giá:" HorizontalAlignment="Left" Margin="35,361,0,0" VerticalAlignment="Top" FontSize="22"/>
         <TextBox x:Name="txtPrice" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="235,361,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="395" FontSize="22"/>
         <Button x:Name="btnSaveProduct" Content="Thêm mới sản phẩm" HorizontalAlignment="Left" Margin="235,403,0,0" VerticalAlignment="Top" FontSize="22" Grid.ColumnSpan="2" Width="225" Click="btnSaveProduct_Click"/>
+        <Button x:Name="btnSua" Grid.Column="1" Content="Sửa" HorizontalAlignment="Left" Margin="180,403,0,0" VerticalAlignment="Top" FontSize="24" Width="95" Click="btnSua_Click"/>
+        <Button x:Name="btnXoa" Grid.Column="1" Content="Xóa" HorizontalAlignment="Left" Margin="305,403,0,0" VerticalAlignment="Top" Width="75" FontSize="24" Click="btnXoa_Click"/>
 
     </Grid>
 </Window>
