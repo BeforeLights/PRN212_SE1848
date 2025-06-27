@@ -9,26 +9,26 @@ namespace MaiQuocAnhWPF
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            EmployeeRepository.Instance.Add(new Employee
-            {
-                EmployeeID = 1,
-                Name = "Admin",
-                UserName = "admin",
-                Password = "admin123",
-                JobTitle = "Administrator"
-            });
-
-            CustomerRepository.Instance.Add(new Customer
-            {
-                CustomerID = 1,
-                CompanyName = "Test Company",
-                ContactName = "John Doe",
-                ContactTitle = "Manager",
-                Address = "123 Main St",
-                Phone = "1234567890"
-            });
-
             base.OnStartup(e);
+            
+            try
+            {
+                // Initialize sample data
+                MaiQuocAnhWPF.Data.SampleDataInitializer.Initialize();
+                
+                // Start with LoginWindow
+                var loginWindow = new LoginWindow();
+                loginWindow.Show();
+                
+                // Ensure the main window is set
+                this.MainWindow = loginWindow;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error starting application: {ex.Message}\n\nStack Trace:\n{ex.StackTrace}", 
+                    "Startup Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                this.Shutdown();
+            }
         }
     }
 }

@@ -89,9 +89,16 @@ namespace MaiQuocAnhWPF
 
         private void ViewOrders_Click(object sender, RoutedEventArgs e)
         {
-            if (CustomerGrid.SelectedItem is not Customer selected) return;
+            if (CustomerGrid.SelectedItem is not Customer selected)
+            {
+                MessageBox.Show("Please select a customer to view their orders.", "No Selection", 
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
             
-            MessageBox.Show($"Orders for {selected.CompanyName} - Feature coming soon!", "Info");
+            // Open the new CustomerOrdersWindow
+            var ordersWindow = new CustomerOrdersWindow(selected);
+            ordersWindow.ShowDialog();
         }
 
         private void Refresh_Click(object sender, RoutedEventArgs e)

@@ -1,0 +1,64 @@
+<Window x:Class="MaiQuocAnhWPF.ProductDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Product Details" Height="500" Width="450" 
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Row="0" Text="Product Information" FontSize="18" FontWeight="Bold" 
+                   Margin="0,0,0,20" HorizontalAlignment="Center"/>
+        
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <Label Content="Product ID:" FontWeight="SemiBold"/>
+                <TextBox Text="{Binding ProductID}" IsReadOnly="True" Margin="0,0,0,10" Height="30"
+                         Background="#FFF0F0F0"/>
+                
+                <Label Content="Product Name:" FontWeight="SemiBold"/>
+                <TextBox Text="{Binding ProductName, UpdateSourceTrigger=PropertyChanged}" 
+                         Margin="0,0,0,10" Height="30"/>
+                
+                <Label Content="Category ID:" FontWeight="SemiBold"/>
+                <TextBox Text="{Binding CategoryID, UpdateSourceTrigger=PropertyChanged}" 
+                         Margin="0,0,0,10" Height="30"/>
+                
+                <Label Content="Unit Price:" FontWeight="SemiBold"/>
+                <TextBox Text="{Binding UnitPrice, UpdateSourceTrigger=PropertyChanged}" 
+                         Margin="0,0,0,10" Height="30"/>
+                
+                <Label Content="Units In Stock:" FontWeight="SemiBold"/>
+                <TextBox Text="{Binding UnitsInStock, UpdateSourceTrigger=PropertyChanged}" 
+                         Margin="0,0,0,10" Height="30"/>
+                
+                <Label Content="Units On Order:" FontWeight="SemiBold"/>
+                <TextBox Text="{Binding UnitsOnOrder, UpdateSourceTrigger=PropertyChanged}" 
+                         Margin="0,0,0,10" Height="30"/>
+                
+                <Label Content="Reorder Level:" FontWeight="SemiBold"/>
+                <TextBox Text="{Binding ReorderLevel, UpdateSourceTrigger=PropertyChanged}" 
+                         Margin="0,0,0,10" Height="30"/>
+                
+                <Label Content="Quantity Per Unit:" FontWeight="SemiBold"/>
+                <TextBox Text="{Binding QuantityPerUnit, UpdateSourceTrigger=PropertyChanged}" 
+                         Margin="0,0,0,10" Height="30"/>
+                
+                <CheckBox Content="Discontinued" IsChecked="{Binding Discontinued}" 
+                          Margin="0,10,0,10" FontWeight="SemiBold"/>
+            </StackPanel>
+        </ScrollViewer>
+        
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+            <Button Content="Save Product" Width="120" Height="35" Click="Save_Click" Margin="0,0,10,0"
+                    Background="#FF4CAF50" Foreground="White" FontWeight="SemiBold"
+                    IsDefault="True"/>
+            <Button Content="Cancel" Width="100" Height="35" Click="Cancel_Click"
+                    Background="#FFE57373" Foreground="White" FontWeight="SemiBold"
+                    IsCancel="True"/>
+        </StackPanel>
+    </Grid>
+</Window>

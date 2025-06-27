@@ -4,40 +4,71 @@ using System.Linq;
 
 namespace MaiQuocAnhWPF.Data.repositories
 {
-    public class ProductRepository
+    public class ProductRepository : IRepository<Product>
     {
-        private static ProductRepository _instance;
+        private static ProductRepository? _instance;
+        private static readonly object _lock = new object();
         private readonly List<Product> _products = new();
 
         private ProductRepository() { }
 
-        public static ProductRepository Instance => _instance ??= new ProductRepository();
+        public static ProductRepository Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    lock (_lock)
+                    {
+                        _instance ??= new ProductRepository();
+                    }
+                }
+                return _instance;
+            }
+        }
 
-        public IEnumerable<Product> GetAll() => _products;
+        public IEnumerable<Product> GetAll() => _products.ToList();
+
         public Product? GetById(int id) => _products.FirstOrDefault(p => p.ProductID == id);
-        public void Add(Product product) => _products.Add(product);
+
+        public void Add(Product product)
+        {
+            if (product.ProductID == 0)
+                product.ProductID = _products.Count > 0 ? _products.Max(p => p.ProductID) + 1 : 1;
+            _products.Add(product);
+        }
+
         public void Update(Product product)
         {
             var existing = GetById(product.ProductID);
             if (existing != null)
             {
                 existing.ProductName = product.ProductName;
-                existing.SupplierID = product.SupplierID;
                 existing.CategoryID = product.CategoryID;
-                existing.QuantityPerUnit = product.QuantityPerUnit;
                 existing.UnitPrice = product.UnitPrice;
                 existing.UnitsInStock = product.UnitsInStock;
                 existing.UnitsOnOrder = product.UnitsOnOrder;
                 existing.ReorderLevel = product.ReorderLevel;
+                existing.QuantityPerUnit = product.QuantityPerUnit;
                 existing.Discontinued = product.Discontinued;
             }
         }
+
         public void Delete(int id)
         {
             var product = GetById(id);
-            if (product != null) _products.Remove(product);
+            if (product != null)
+                _products.Remove(product);
         }
-        public IEnumerable<Product> Search(string keyword) =>
-            _products.Where(p => p.ProductName.Contains(keyword, System.StringComparison.OrdinalIgnoreCase));
+
+        public IEnumerable<Product> Search(string keyword)
+        {
+            if (string.IsNullOrWhiteSpace(keyword))
+                return GetAll();
+
+            return _products.Where(p => 
+                p.ProductName.Contains(keyword, StringComparison.OrdinalIgnoreCase) ||
+                p.QuantityPerUnit.Contains(keyword, StringComparison.OrdinalIgnoreCase));
+        }
     }
 }

@@ -14,7 +14,7 @@ namespace MaiQuocAnhWPF.Business
         public void AddOrder(Order order) => _repo.Add(order);
         public void UpdateOrder(Order order) => _repo.Update(order);
         public void DeleteOrder(int id) => _repo.Delete(id);
-        public IEnumerable<Order> GetOrdersByCustomer(int customerId) => _repo.SearchByCustomer(customerId);
-        public IEnumerable<Order> GetOrdersByDateRange(DateTime from, DateTime to) => _repo.SearchByDateRange(from, to);
+        public IEnumerable<Order> SearchOrders(string keyword) => _repo.Search(keyword);
+        public IEnumerable<Order> GetOrdersByCustomer(int customerId) => _repo.GetOrdersByCustomer(customerId);
     }
 }
